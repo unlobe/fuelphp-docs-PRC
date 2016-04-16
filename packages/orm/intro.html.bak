@@ -1,0 +1,116 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="./../../assets/css/combined.css">
+	<link rel="shortcut icon" href="./../../favicon.ico" />
+	<script src="http://www.google.com/jsapi" type="text/javascript"></script>
+	<script type="text/javascript">
+		var path = './../../';
+	</script>
+	<script src="./../../assets/js/combined.js"></script>
+	<title>简介 - Orm 套件 - FuelPHP 文档</title>
+</head>
+<body>
+	<div id="container">
+		<header id="header">
+			<div class="table">
+				<h1>
+					<strong>FuelPHP, 一个PHP 5.3 框架</strong>
+					文档
+				</h1>
+
+				<form id="google_search">
+					<p>
+						<span id="search_clear">&nbsp;</span>
+						<input type="submit" name="search_submit" id="search_submit" value="搜索" />
+						<input type="text" value="" id="search_input" name="search_input" />
+					</p>
+				</form>
+			</div>
+			<nav>
+
+				<div class="clear"></div>
+			</nav>
+			<a href="#" id="toc_handle">目录</a>
+			<div class="clear"></div>
+		</header>
+
+		<div id="cse">
+			<div id="cse_point"></div>
+			<div id="cse_content"></div>
+		</div>
+
+		<div id="main">
+			<h2>Orm</h2>
+
+			<p>Orm是 <a href="http://en.wikipedia.org/wiki/Object_relational_mapper" target="_blank">对象关系映射器(Object
+				Relational Mapper)</a> 他做两件事: 它将数据库表行映射到对象,它允许您创建这些对象之间的关系。<br />
+				他密切关注 <a href="http://en.wikipedia.org/wiki/Active_record_pattern" target="_blank">
+				活动记录</a> 模式,但也受到其他系统的影响。</p>
+
+			<section>
+				<h2 id="intro">简介</h2>
+
+				<p>不像一些其他的ActiveRecord 实现, 我们实现的是很小、快速的、使用简单的. 它尽可能的使数据库的创建、更新、删除操作更加简单。
+				</p>
+			</section>
+
+			<section>
+				<h2 id="install">安装</h2>
+
+				<p>Orm 套件已经包含在下载的Fuel中，你需要在配置中启动它。.</p>
+					<pre class="php"><code>'always_load' => array(
+	'packages' => array(
+		'orm',
+	),
+),</code></pre>
+			</section>
+
+			<section>
+				<h2 id="troubleshooting">故障排除</h2>
+
+				<p>一些常见的问题.</p>
+
+				<h3>关系/外键 无法存储 (1)</h3>
+				<p>This happens most often when you're using the wrong type of relationship. Especially Has-one and
+					Belongs-to tend to get mixed up. Reread the examples in the docs to make sure you're using the
+					correct relation types and check if everything is configured correctly.</p>
+
+				<h3>I can't relate objects (2)</h3>
+				<p>Make sure your model is extending <code>Orm\Model</code> and not <code>Model_Crud</code>.</p>
+
+				<h3>I get an exception that my related model in a package/module can't be found</h3>
+				<p>Make sure the package or module is loaded by Fuel, otherwise the Autoloader won't be able to find
+					the class.<br />
+					And when configuring the related model <code>"model_to"</code> make sure you configure the full
+					classname, this includes the namespace <em>even if you're in that namespace</em>. Classnames in
+					strings are always taken from global context, no matter the current namespace context.</p>
+
+				<h3>I get an Orm\FrozenObject exception</h3>
+				<p>Objects can't be edited while being saved to the database, that prevents circular saving and resaving
+					already saved objects. This shouldn't happen during normal usage and is most often caused by faulty
+					configuration of relations.<br />
+					Sometimes this can be caused by a bug, especially when you're not using a stable release.</p>
+
+				<h3>I have defined a limit and offset, but the results are not correct</h3>
+				<p>The ORM always makes sure that query results are consistent. If you run a query that contains related
+					models, a subquery will be generated to make sure the entire related resultset is fetched. Even if this
+					means more records then the limit you have set will be fetched. This is because once you start manipulating
+					incomplete resultsets, very bad things might happen to your related models.</p>
+				<p>If you are absolutely sure you are not going to manipulate the results, for example because you need them
+					for pagination only, you can use <kbd>rows_limit()</kbd> and <kbd>rows_offset()</kbd> instead, which will
+					forces them on the entire query.</p>
+			</section>
+
+		</div>
+
+		<footer>
+			<p>
+				&copy; FuelPHP Development Team 2010-2015 - <a href="http://fuelphp.com">FuelPHP</a> is released under the MIT license.
+			</p>
+		</footer>
+	</div>
+</body>
+</html>

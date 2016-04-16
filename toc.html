@@ -1,0 +1,363 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="./assets/css/combined.css">
+	<link rel="shortcut icon" href="./favicon.ico" />
+	<script src="http://www.google.com/jsapi" type="text/javascript"></script>
+	<script type="text/javascript">
+		var path = './';
+	</script>
+	<script src="./assets/js/combined.js"></script>
+	<title> FuelPHP 文档目录</title>
+</head>
+<body>
+	<div id="container">
+		<header id="header">
+			<div class="table">
+				<h1>
+					<strong>FuelPHP, 一个 PHP 5.3 框架</strong>
+					文档
+				</h1>
+
+				<form id="google_search">
+					<p>
+						<span id="search_clear">&nbsp;</span>
+						<input type="submit" name="search_submit" id="search_submit" value="search" />
+						<input type="text" value="" id="search_input" name="search_input" />
+					</p>
+				</form>
+			</div>
+			<nav>
+
+				<div class="clear"></div>
+			</nav>
+			<a href="#" id="toc_handle">目录</a>
+			<div class="clear"></div>
+		</header>
+
+		<div id="cse">
+			<div id="cse_point"></div>
+			<div id="cse_content"></div>
+		</div>
+
+		<div id="main">
+
+			<h2>Table of Contents</h2>
+
+			<h3>Basic</h3>
+			<ul class="toc">
+				<li><a href="index.html">首页</a> - 框架介绍</li>
+				<li><a href="requirements.html">需求</a> - 我需要什么运行FuelPHP?</li>
+				<li><a href="license.html">许可证</a> - 源代码授权</li>
+				<li><a href="contribute.html">贡献</a> - 如何贡献</li>
+				<li><a href="credits.html">致谢名单</a> - 感谢你们让FuelPHP更棒!</li>
+			</ul>
+
+			<h3>安装</h3>
+			<ul class="toc">
+				<li><a href="installation/instructions.html">介绍</a> - 如何安装 FuelPHP 框架</li>
+				<li><a href="installation/download.html">下载</a> - 下载一个zip文件的框架版本</li>
+				<li><a href="installation/upgrade.html">更新</a> - 如何更新一个已存在的FuelPHP 应用程序</li>
+				<li><a href="installation/tutorials.html">教程</a> - 外部教学、课程和录像</li>
+				<li><a href="installation/troubleshooting.html">故障排除</a> - 常见问题概括</li>
+			</ul>
+
+			<h3>常规</h3>
+			<ul class="toc">
+				<li>类
+					<ul>
+						<li><a href="general/classes.html">简介</a> - FuelPHP类的结构和定义</li>
+						<li><a href="general/extending_core.html">核心扩展</a> - 如何在 FuelPHP 核心中增加你的代码</li>
+					</ul>
+				</li>
+				<li><a href="general/coding_standards.html">编码标准</a> - 在发送一个请求前请先阅读!</li>
+				<li><a href="general/configuration.html">配置</a> - 框架全局配置</li>
+				<li><a href="general/constants.html">常量</a> - 可用的常量</li>
+				<li><a href="general/environments.html">环境</a> - 在不同的环境中运行应用程序</li>
+				<li><a href="general/mvc.html">MVC</a> - 介绍MVC原则</li>
+				<li><a href="general/models.html">模型</a> - 什么是模型，如何使用?</li>
+				<li><a href="general/views.html">视图</a> - 创建输出</li>
+				<li><a href="general/presenters.html">表现控制器</a> - 从显示和逻辑中分离出来的模版</li>
+				<li>控制器
+					<ul>
+						<li><a href="general/controllers/base.html">基础</a> - 控制器是什么，如何工作?</li>
+						<li><a href="general/controllers/template.html">模版</a> - 模版输出的基础控制器</li>
+						<li><a href="general/controllers/rest.html">Rest</a> -  RESTful API的基础控制器</li>
+						<li><a href="general/controllers/hybrid.html">混合</a> -模版输出和RESTful API基础控制器结合</li>
+					</ul>
+				</li>
+				<li><a href="general/namespacing.html">命名空间</a> - 在你的应用程序中使用命名空间</li>
+				<li><a href="general/routing.html">路由</a> - 路由一个Uri请求到控制器的动作</li>
+				<li><a href="general/security.html">安全性</a> - 确保应用程序的安全</li>
+				<li><a href="general/modules.html">模块组</a> - 让应用程序模块化、可移植化</li>
+				<li><a href="general/packages.html">套件</a> - 核心扩展</li>
+				<li><a href="general/hmvc.html">HMVC 请求</a> - 让控制器之间请求，确保框架轻度耦合</li>
+				<li><a href="general/migrations.html">迁移</a> - 增加程序的可移植性，如数据库</li>
+				<li><a href="general/tasks.html">任务</a> - 从命令行或调度器运行后台程序</li>
+				<li><a href="general/unit_testing.html">单元测试</a> - 用 PHPUnit 测试程序</li>
+				<li><a href="general/error.html">错误处理</a> -  处理程序错误</li>
+				<li><a href="general/profiling.html">分析</a> - 我的记忆去哪里了？生成什么查询？哪一个是慢的？</li>
+			</ul>
+
+			<h3>第三方 </h3>
+			<ul class="toc">
+				<li><a href="vendor/intro.html">简介</a> - 使用的供应商包的概述，以及他们的许可证信息</li>
+				<li><a href="vendor/htmlawed.html">htmLawed</a> - 过滤及筛选发送资料</li>
+				<li><a href="vendor/markdown.html">Markdown</a> -  Markdown 文本解析器</li>
+				<li><a href="vendor/phpquickprofiler.html">PHPQuickProfiler</a> -  FuelPHP 基础分析器</li>
+				<li><a href="vendor/phpseclib.html">PHPSecLib</a> - 所有与加密和安全通信</li>
+				<li><a href="vendor/spyc.html">spyc</a> -  YAML 解析器</li>
+			</ul>
+
+			<h2>FuelPHP 核心</h2>
+
+			<h3>类</h3>
+			<ul class="toc">
+				<li>Agent - 用户代理信息
+					<ul>
+						<li><a href="classes/agent/config.html">配置</a></li>
+						<li><a href="classes/agent/usage.html">用法</a></li>
+					</ul>
+				</li>
+				<li><a href="classes/arr.html">Arr</a> - 实用数据操作类</li>
+				<li>Asset -  图片, js脚本, CSS 等资源文件
+					<ul>
+						<li><a href="classes/asset/config.html">配置</a></li>
+						<li><a href="classes/asset/usage.html">用法</a></li>
+						<li><a href="classes/asset/advanced.html">高级</a></li>
+					</ul>
+				</li>
+				<li><a href="classes/autoloader.html">Autoloader</a></li>
+				<li>Cache - 后端存储的缓存数据
+					<ul>
+						<li><a href="classes/cache/config.html">配置</a></li>
+						<li><a href="classes/cache/usage.html">用法</a></li>
+						<li><a href="classes/cache/advanced.html">高级</a></li>
+					</ul>
+				</li>
+				<li><a href="classes/cli.html">Cli</a> - 实用的命令行与用户交互类</li>
+				<li><a href="classes/config.html">Config</a> - 配置程序数据</li>
+				<li><a href="classes/cookie.html">Cookie</a> -用cookies工作</li>
+				<li><a href="classes/crypt.html">Crypt</a> - 加密和解密</li>
+				<li>Database - 面向对象的查询生成器
+					<ul>
+						<li><a href="classes/database/introduction.html">简介</a></li>
+						<li><a href="classes/database/usage.html">用法</a></li>
+						<li><a href="classes/database/db.html">DB </a></li>
+						<li><a href="classes/database/dbutil.html">DBUtil</a></li>
+						<li>Query 构建
+							<ul>
+								<li><a href="classes/database/qb.html">简介</a></li>
+								<li><a href="classes/database/usage.html">Insert 编写</a></li>
+								<li><a href="classes/database/db.html">Select 编写</a></li>
+								<li><a href="classes/database/dbutil.html">Update 编写</a></li>
+								<li><a href="classes/database/db.html">Delete 编写</a></li>
+								<li><a href="classes/database/db.html">Where 编写</a></li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+				<li><a href="classes/date.html">Date</a> - 处理日期、时间和时区</li>
+				<li><a href="classes/debug.html">Debug</a> - 实用程序调试类</li>
+				<li><a href="classes/event.html">Event</a> - 创建一个事件驱动程序</li>
+				<li>Error</li>
+				<li>Exception</li>
+				<li>Fieldset - 一种面向对象的方式来生成HTML表单
+					<ul>
+						<li><a href="classes/fieldset/fieldset.html">Fieldset</a> - fieldset字段集合</li>
+						<li><a href="classes/fieldset/field.html">Fieldset_Field</a> - 自定义字段字段对象</li>
+					</ul>
+				</li>
+				<li>File - 处理文件和目录
+					<ul>
+						<li><a href="classes/file/intro.html">简介</a></li>
+						<li><a href="classes/file/usage.html">用法</a></li>
+						<li><a href="classes/file/advanced.html">高级</a></li>
+						<li><a href="classes/file/handlers.html">Handlers</a></li>
+					</ul>
+				</li>
+				<li><a href="classes/finder.html">Finder</a> - 定位和加载文件</li>
+				<li><a href="classes/form.html">Form</a> -  生成HTML表单元素实用类</li>
+				<li><a href="classes/format.html">Format</a> - 数据格式转换</li>
+				<li><a href="classes/ftp.html">Ftp</a> - 使用FTP发送或接收文件</li>
+				<li><a href="classes/fuel.html">Fuel</a> - FuelPHP 框架引导类</li>
+				<li><a href="classes/html.html">Html</a> - 生成HTML元素实用类</li>
+				<li><a href="classes/image.html">Image</a> - 使用GD和ImageMagick图像处理</li>
+				<li><a href="classes/inflector.html">Inflector</a></li>
+				<li><a href="classes/input.html">Input</a> - 所有输入的处理</li>
+				<li><a href="classes/lang.html">Lang</a> - 支持多语言</li>
+				<li><a href="classes/log.html">Log</a> - 日志记录器</li>
+				<li><a href="classes/markdown.html">Markdown</a> - Markdown 解析</li>
+				<li><a href="classes/migrate.html">Migrate</a> - 迁移</li>
+				<li>Model_Crud - 与数据库交互的基本数据
+					<ul>
+						<li><a href="classes/model_crud/config.html">配置</a></li>
+						<li><a href="classes/model_crud/methods.html">方法</a></li>
+						<li>用法</li>
+					</ul>
+				</li>
+				<li><a href="classes/module.html">模块</a> - 加载、卸载和可用的模块列表</li>
+				<li>Mongo_Db -  Mongo 数据库接口
+					<ul>
+						<li><a href="classes/mongo/introduction.html">简介</a></li>
+						<li><a href="classes/mongo/methods.html">方法</a></li>
+						<li>用法</li>
+					</ul>
+				</li>
+				<li><a href="classes/num.html">Num</a> - 处理数字实用类</li>
+				<li><a href="classes/package.html">套件</a> - 加载、卸载和可用的套件列表</li>
+				<li><a href="classes/pagination.html">Pagination</a> - 分页表生成的HTML</li>
+				<li><a href="classes/presenter.html">Presenter</a> - 从视图中分离出来的逻辑</li>
+				<li><a href="classes/profiler.html">Profiler</a> - 程序属性文件</li>
+				<li><a href="classes/Redis.html">Redis_Db</a> - Redis接口</li>
+				<li>Request - 紧急附加请求
+					<ul>
+						<li><a href="classes/request/request.html">URI 请求</a> - 内置 MVC 和 HMVC 调用</li>
+						<li><a href="classes/request/curl.html">Curl</a> - 外部扩展(RESTful) 数据使用 Curl 库</li>
+						<li><a href="classes/request/soap.html">Soap</a> - 程序交互使用 SOAP</li>
+					</ul>
+				</li>
+				<li><a href="classes/response.html">Response</a> - 返回响应</li>
+				<li><a href="classes/router.html">Router</a> - FuelPHP请求路由引擎</li>
+				<li><a href="classes/security.html">Security</a> - 程序安全实用类</li>
+				<li>Session - 在无状态环境中保持状态
+					<ul>
+						<li><a href="classes/session/config.html">配置</a></li>
+						<li><a href="classes/session/usage.html">用法</a></li>
+						<li><a href="classes/session/advanced.html">高级</a></li>
+					</ul>
+				</li>
+				<li><a href="classes/str.html">Str</a> - String操作实用类</li>
+				<li>Theme - 以产生输出到下一级的主题应用程序
+					<ul>
+						<li><a href="classes/theme/introduction.html">简介</a></li>
+						<li><a href="classes/theme/methods.html">方法</a></li>
+						<li><a href="classes/theme/advanced.html">高级</a></li>
+					</ul>
+				</li>
+				<li>Unzip - 解压zip 文件</li>
+				<li>Upload - 验证和处理上传文件
+					<ul>
+						<li><a href="classes/upload/config.html">配置</a></li>
+						<li><a href="classes/upload/usage.html">用法</a></li>
+					</ul>
+				</li>
+				<li><a href="classes/uri.html">Uri</a> - URI 和 URL 处理实用类</li>
+				<li>Validation - 使用易于定义规则的数据来验证数据
+					<ul>
+						<li><a href="classes/validation/validation.html">简介</a></li>
+						<li><a href="classes/validation/methods.html">方法</a></li>
+						<li><a href="classes/validation/errors.html">错误</a></li>
+					</ul>
+				</li>
+				<li><a href="classes/view.html">View</a> - 面向对象的输出</li>
+			</ul>
+
+			<h2>Auth 套件</h2>
+
+			<ul class="toc">
+				<li><a href="packages/auth/intro.html">简介</a></li>
+				<li><a href="packages/auth/drivers.html">编写 驱动</a></li>
+				<li>驱动 类型
+					<ul>
+						<li><a href="packages/auth/types/login.html">Login</a></li>
+						<li><a href="packages/auth/types/group.html">Group</a></li>
+						<li><a href="packages/auth/types/acl.html">ACL</a></li>
+					</ul>
+				</li>
+				<li>Simpleauth
+					<ul>
+						<li><a href="packages/auth/simpleauth/intro.html">简介</a></li>
+						<li><a href="packages/auth/simpleauth/usage.html">用法</a></li>
+					</ul>
+				</li>
+				<li>Ormauth
+					<ul>
+						<li><a href="packages/auth/ormauth/intro.html">简介</a></li>
+						<li><a href="packages/auth/ormauth/usage.html">用法</a></li>
+					</ul>
+				</li>
+				<li>Opauth
+					<ul>
+						<li><a href="packages/auth/opauth/intro.html">简介</a></li>
+						<li><a href="packages/auth/opauth/usage.html">用法</a></li>
+					</ul>
+				</li>
+				<li>范例
+					<ul>
+						<li><a href="packages/auth/examples/auth.html">Auth 控制器</a></li>
+						<li><a href="packages/auth/examples/opauth.html">Opauth 控制器</a></li>
+					</ul>
+				</li>
+			</ul>
+
+			<h2>Email 套件</h2>
+
+			<ul class="toc">
+				<li><a href="packages/email/introduction.html">简介</a></li>
+				<li><a href="packages/email/usage.html">用法</a></li>
+				<li><a href="packages/email/methods.html">方法</a></li>
+				<li><a href="packages/email/troubleshooting.html">故障排除</a></li>
+			</ul>
+
+			<h2>Oil 套件</h2>
+
+			<ul class="toc">
+				<li><a href="packages/oil/intro.html">简介</a></li>
+				<li><a href="packages/oil/generate.html">产生</a></li>
+				<li><a href="packages/oil/refine.html">改善</a></li>
+				<li><a href="packages/oil/package.html">套件</a></li>
+				<li><a href="packages/oil/test.html">测试</a></li>
+				<li><a href="packages/oil/console.html">控制台</a></li>
+			</ul>
+
+			<h2>Orm 套件</h2>
+
+			<ul class="toc">
+				<li><a href="packages/orm/intro.html">简介</a></li>
+				<li><a href="packages/orm/creating_models.html">创建模型 </a></li>
+				<li><a href="packages/orm/crud.html">CRUD</a></li>
+				<li>关系模型
+					<ul>
+						<li><a href="packages/orm/relations/intro.html">简介</a></li>
+						<li><a href="packages/orm/relations/belongs_to.html">属于</a></li>
+						<li><a href="packages/orm/relations/has_one.html">一对一</a></li>
+						<li><a href="packages/orm/relations/has_many.html">一对多</a></li>
+						<li><a href="packages/orm/relations/many_many.html">多对多</a></li>
+					</ul>
+				</li>
+				<li>模型
+					<ul>
+						<li><a href="packages/orm/model/soft.html">软删除</a></li>
+						<li><a href="packages/orm/model/temporal.html">临时/修订版本</a></li>
+						<li><a href="packages/orm/model/nestedset.html">集合套</a></li>
+					</ul>
+				</li>
+				<li><a href="packages/orm/eav.html">EAV 容器</a></li>
+				<li>观察者
+					<ul>
+						<li><a href="packages/orm/observers/intro.html">简介</a></li>
+						<li><a href="packages/orm/observers/included.html">包括 观察者</a></li>
+						<li><a href="packages/orm/observers/creating.html">自定义</a></li>
+					</ul>
+				</li>
+			</ul>
+
+			<h2>Parser 套件</h2>
+
+			<ul class="toc">
+				<li><a href="packages/parser/intro.html">简介</a></li>
+			</ul>
+
+		</div>
+
+		<footer>
+			<p>
+				&copy; FuelPHP Development Team 2010-2015 - <a href="http://fuelphp.com">FuelPHP</a> is released under the MIT license.
+			</p>
+		</footer>
+	</div>
+</body>
+</html>

@@ -1,0 +1,1330 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="./../../assets/css/combined.css">
+	<link rel="shortcut icon" href="./../../favicon.ico" />
+	<script src="http://www.google.com/jsapi" type="text/javascript"></script>
+	<script type="text/javascript">
+		var path = './../../';
+		var class_prefix = "DBUtil::";
+	</script>
+	<script src="./../../assets/js/combined.js"></script>
+	<title>DBUtil - 类 - FuelPHP 文档 </title>
+</head>
+<body>
+	<div id="container">
+		<header id="header">
+			<div class="table">
+				<h1>
+					<strong>FuelPHP, 一个 PHP 5.3 框架</strong>
+					文档
+				</h1>
+
+				<form id="google_search">
+					<p>
+						<span id="search_clear">&nbsp;</span>
+						<input type="submit" name="search_submit" id="search_submit" value="搜索" />
+						<input type="text" value="" id="search_input" name="search_input" />
+					</p>
+				</form>
+			</div>
+			<nav>
+
+				<div class="clear"></div>
+			</nav>
+			<a href="#" id="toc_handle">目录</a>
+			<div class="clear"></div>
+		</header>
+
+		<div id="cse">
+			<div id="cse_point"></div>
+			<div id="cse_content"></div>
+		</div>
+
+		<div id="main">
+
+			<h2>DBUtil 类</h2>
+
+			<p>DBUtil类对数据库进行管理和执行操作.</p>
+
+			<h3 id="managing">Managing functions</h3>
+
+			<p>DBUtil能够创建、重命名、修改、删除数据库记录.</p>
+
+			<article>
+				<h4 class="method" id="method_set_connection">set_connection($connection)</h4>
+				<p><strong>set_connection</strong>设置所有方法默认DBUtil连接.</p>
+				<table class="method">
+					<tbody>
+						<tr>
+							<th>Static</th>
+							<td>是</td>
+						</tr>
+						<tr>
+							<th>Parameters</th>
+							<td>
+								<table class="parameters">
+									<tr>
+										<th>参数</th>
+										<th>默认</th>
+										<th class="description">详细描述</th>
+									</tr>
+									<tr>
+										<th><kbd>$connection</kbd></th>
+										<td><strong>必须</strong></td>
+										<td class="description">数据库连接.</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+						<tr>
+							<th>Returns</th>
+							<td>返回受影响的行数.</td>
+						</tr>
+						<tr>
+							<th>Throws</th>
+							<td>\Database_Exception 失败时的异常</td>
+						</tr>
+						<tr>
+							<th>Example</th>
+							<td>
+								<pre class="php"><code>// Set an alternative database connection for DBUtil
+DBUtil::set_connection('my_database_group');
+
+// Do other DBUtil calls with that connection.
+...
+
+// And set it back to default.
+DBUtil::set_connection(null);
+</code></pre>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</article>
+
+			<article>
+				<h4 class="method" id="method_create_database">create_database($database, charset = null, $if_not_exists = true, $db = null)</h4>
+				<p>The <strong>create_database</strong> 创建数据库.  失败时抛出Database_Exception 异常.</p>
+				<table class="method">
+					<tbody>
+						<tr>
+							<th>Static</th>
+							<td>是</td>
+						</tr>
+						<tr>
+							<th>Parameters</th>
+							<td>
+								<table class="parameters">
+									<tr>
+										<th>参数</th>
+										<th>默认</th>
+										<th class="description">详细描述</th>
+									</tr>
+									<tr>
+										<th><kbd>$database</kbd></th>
+										<td><em>required</em></td>
+										<td>数据库名字</td>
+									</tr>
+									<tr>
+										<th><kbd>$charset</kbd></th>
+										<td><em>null</em></td>
+										<td>默认字符集</td>
+									</tr>
+									<tr>
+										<th><kbd>$if_not_exists</kbd></th>
+										<td><strong>true</strong></td>
+										<td>是否使用<em>IF NOT EXISTS</em></td>
+									</tr>
+									<tr>
+										<th><kbd>$db</kbd></th>
+										<td><pre class="php"><code>null</code></pre></td>
+										<td class="description">数据库连接.</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+						<tr>
+							<th>Returns</th>
+							<td>返回受影响的行数.</td>
+						</tr>
+						<tr>
+							<th>Throws</th>
+							<td>\Database_Exception 失败时异常</td>
+						</tr>
+						<tr>
+							<th>示例</th>
+							<td>
+								<pre class="php"><code>// Create a database named `my_database`
+DBUtil::create_database('my_database');
+
+// Catch the exception
+try
+{
+	DBUtil::create_database('my_database');
+}
+catch(\Database_Exception $e)
+{
+	// Creation failed...
+}
+
+// You can also set a default charset.
+// CREATE DATABASE IF NOT EXISTS `new_database` DEFAULT CHARACTER SET 'utf8'
+DBUtil::create_database('new_database', 'utf8');
+
+// CREATE DATABASE IF NOT EXISTS `new_database  DEFAULT CHARACTER SET 'utf8' COLLATE 'utf8_unicode_ci'
+DBUtil::create_database('new_database', 'utf8_unicode_ci');
+</code></pre>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<p>如果没有提供字符集，会使用db群组的字符集.</p>
+			</article>
+
+			<article>
+				<h4 class="method" id="method_drop_database">drop_database($database, $db = null)</h4>
+				<p> <strong>drop_database</strong> 删除数据库.  失败时会抛 Database_Exception异常.</p>
+				<table class="method">
+					<tbody>
+						<tr>
+							<th>Static</th>
+							<td>是</td>
+						</tr>
+						<tr>
+							<th>Parameters</th>
+							<td>
+								<table class="parameters">
+									<tr>
+										<th>参数</th>
+										<th>默认</th>
+										<th class="description">详细描述</th>
+									</tr>
+									<tr>
+										<th><kbd>$database</kbd></th>
+										<td><em>required</em></td>
+										<td>数据库名字</td>
+									</tr>
+									<tr>
+										<th><kbd>$db</kbd></th>
+										<td><pre class="php"><code>null</code></pre></td>
+										<td class="description">数据库连接.</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+						<tr>
+							<th>Returns</th>
+							<td>返回被影响的行数.</td>
+						</tr>
+						<tr>
+							<th>Throws</th>
+							<td>\Database_Exception 失败时</td>
+						</tr>
+						<tr>
+							<th>示例</th>
+							<td>
+								<pre class="php"><code>// Drop a database named `my_database`
+DBUtil::drop_database('my_database');
+
+// Catch the exception
+try
+{
+	DBUtil::drop_database('my_database');
+}
+catch(\Database_Exception $e)
+{
+	// Drop failed...
+}
+</code></pre>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</article>
+
+			<article>
+				<h4 class="method" id="method_table_exists">table_exists($table, $db = null)</h4>
+				<p>The <strong>table_exists</strong> 检查数据库表是否存在.</p>
+				<table class="method">
+					<tbody>
+						<tr>
+							<th>Static</th>
+							<td>是</td>
+						</tr>
+						<tr>
+							<th>Parameters</th>
+							<td>
+								<table class="parameters">
+									<tr>
+										<th>参数</th>
+										<th>默认</th>
+										<th class="description">详细描述</th>
+									</tr>
+									<tr>
+										<td><kbd>$table</kbd></td>
+										<td><em>required</em></td>
+										<td>数据库表名称</td>
+									</tr>
+									<tr>
+										<th><kbd>$db</kbd></th>
+										<td><pre class="php"><code>null</code></pre></td>
+										<td class="description">数据库连接.</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+						<tr>
+							<th>Returns</th>
+							<td>数据库表存在返回true, 不存在返回false.</td>
+						</tr>
+						<tr>
+							<th>示例</th>
+							<td>
+								<pre class="php"><code>// Check if table named 'my_table' exists
+if(DBUtil::table_exists('my_table'))
+{
+	// Table exists
+} else
+{
+	// Table does NOT exist, create it!
+}</code>
+								</pre>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</article>
+
+			<article>
+				<h4 class="method" id="method_drop_table">drop_table($table, $db = null)</h4>
+				<p>The <strong>drop_table</strong> 删除数据库表.  失败会抛出Database_Exception异常.</p>
+				<table class="method">
+					<tbody>
+						<tr>
+							<th>Static</th>
+							<td>是</td>
+						</tr>
+						<tr>
+							<th>Parameters</th>
+							<td>
+								<table class="parameters">
+									<tr>
+										<th>参数</th>
+										<th>默认</th>
+										<th class="description">详细描述</th>
+									</tr>
+									<tr>
+										<th><kbd>$table</kbd></th>
+										<td><em>required</em></td>
+										<td>数据库表名称</td>
+									</tr>
+									<tr>
+										<th><kbd>$db</kbd></th>
+										<td><pre class="php"><code>null</code></pre></td>
+										<td class="description">数据库连接.</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+						<tr>
+							<th>Returns</th>
+							<td>返回被影响的行数.</td>
+						</tr>
+						<tr>
+							<th>Throws</th>
+							<td>\Database_Exception 失败时</td>
+						</tr>
+						<tr>
+							<th>示例</th>
+							<td>
+								<pre class="php"><code>// Drop a table named `my_table`
+DBUtil::drop_table('my_table');
+
+// Catch the exception
+try
+{
+	DBUtil::drop_table('my_table');
+}
+catch(\Database_Exception $e)
+{
+	// Drop failed...
+}
+</code></pre>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</article>
+
+			<article>
+				<h4 class="method" id="method_rename_table">rename_table($table, $new_table_name, $db = null)</h4>
+				<p>The <strong>rename_table</strong> 重命名数据库表.</p>
+				<table class="method">
+					<tbody>
+						<tr>
+							<th>Static</th>
+							<td>是</td>
+						</tr>
+						<tr>
+							<th>Parameters</th>
+							<td>
+								<table class="parameters">
+									<tr>
+										<th>参数</th>
+										<th>默认</th>
+										<th class="description">详细描述</th>
+									</tr>
+									<tr>
+										<th><kbd>$table</kbd></th>
+										<td><em>required</em></td>
+										<td>旧的数据库表名称</td>
+									</tr>
+									<tr>
+										<th><kbd>$new_table_name</kbd></th>
+										<td><em>required</em></td>
+										<td>新数据库表名称</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+						<tr>
+							<th>Returns</th>
+							<td>返回受影响行数.</td>
+						</tr>
+						<tr>
+							<th>Throws</th>
+							<td>\Database_Exception 失败时</td>
+						</tr>
+						<tr>
+							<th>示例</th>
+							<td>
+								<pre class="php"><code>// Rename `my_table` to `my_new_table`
+DBUtil::rename_table('my_table', 'my_new_table');
+
+// Catch the exception
+try
+{
+	DBUtil::rename_table('my_table', 'my_new_table');
+}
+catch(\Database_Exception $e)
+{
+	// Rename failed...
+}
+</code></pre>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</article>
+
+			<article>
+				<h4 class="method" id="method_create_table">create_table($table, $fields, $primary_keys = array(), $if_not_exists = true, $engine = false, $charset = null, $foreign_keys = array(), $db = null)</h4>
+				<p><strong>create_table</strong>创建数据库表.</p>
+				<table class="method">
+					<tbody>
+						<tr>
+							<th>Static</th>
+							<td>是</td>
+						</tr>
+						<tr>
+							<th>Parameters</th>
+							<td>
+								<table class="parameters">
+									<tr>
+										<th>参数</th>
+										<th>默认</th>
+										<th class="description">详细描述</th>
+									</tr>
+									<tr>
+										<th><kbd>$table</kbd></th>
+										<td><em>required</em></td>
+										<td>数据库表名称</td>
+									</tr>
+									<tr>
+										<th><kbd>$fields</kbd></th>
+										<td><em>required</em></td>
+										<td>字段数组</td>
+									</tr>
+									<tr>
+										<th><kbd>$primary_keys</kbd></th>
+										<td><strong>array()</strong></td>
+										<td>主键数组</td>
+									</tr>
+									<tr>
+										<th><kbd>$if_not_exists</kbd></th>
+										<td><strong>true</strong></td>
+										<td>是否使用 <em>IF NOT EXISTS</em></td>
+									</tr>
+									<tr>
+										<th><kbd>$engine</kbd></th>
+										<td><strong>false</strong></td>
+										<td>选择使用存储引擎 (MyISAM, InnoDB, ...)</td>
+									</tr>
+									<tr>
+										<th><kbd>$charset</kbd></th>
+										<td><pre class="php"><code>null</code></pre></td>
+										<td>默认字符集, 会退回到有效的db组字符集</td>
+									</tr>
+									<tr>
+										<th><kbd>$foreign_keys</kbd></th>
+										<td><strong>array()</strong></td>
+										<td>外键数组. 数组键 'key' 和 'reference' 是必须的且缺少一个就会抛出异常, 其他的都是可选的.</td>
+									</tr>
+									<tr>
+										<th><kbd>$db</kbd></th>
+										<td><pre class="php"><code>null</code></pre></td>
+										<td class="description">数据库连接.</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+						<tr>
+							<th>Returns</th>
+							<td>返回受影响的行数.</td>
+						</tr>
+						<tr>
+							<th>Throws</th>
+							<td>\Database_Exception 失败时</td>
+						</tr>
+						<tr>
+							<th>Example</th>
+							<td>
+								<pre class="php"><code>\DBUtil::create_table(
+	'users',
+	array(
+		'id' => array('constraint' => 11, 'type' => 'int', 'auto_increment' => true),
+		'name' => array('type' => 'text'),
+		'email' => array('constraint' => 50, 'type' => 'varchar'),
+		'title' => array('constraint' => 50, 'type' => 'varchar', 'default' => 'mr.'),
+		'password' => array('constraint' => 125, 'type' => 'varchar'),
+	),
+	array('id'), false, 'InnoDB', 'utf8_unicode_ci',
+	array(
+		array(
+			'constraint' => 'constraintA',
+			'key' => 'keyA',
+			'reference' => array(
+				'table' => 'table',
+				'column' => 'field',
+			),
+			'on_update' => 'CASCADE',
+			'on_delete' => 'RESTRICT'
+		),
+		array(
+			'key' => 'keyB',
+			'reference' => array(
+				'table' => 'table',
+				'column' => array(
+					'fieldA',
+					'fieldB'
+				),
+			),
+		),
+	),
+);
+
+/* produces the following SQL statement:
+CREATE TABLE `users` (
+	`id` int(11) NOT NULL AUTO_INCREMENT,
+	`name` text NOT NULL,
+	`email` varchar(50) NOT NULL,
+	`title` varchar(50) DEFAULT 'mr.' NOT NULL,
+	`password` varchar(125) NOT NULL,
+	PRIMARY KEY `id` (`id`),
+	CONSTRAINT constraintA FOREIGN KEY (keyA) REFERENCES table (field) ON UPDATE CASCADE ON DELETE RESTRICT,
+	FOREIGN KEY (keyB) REFERENCES table (fieldA, fieldB)
+) ENGINE = InnoDB  DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+*/</code></pre>
+							</td>
+						</tr>
+						<tr>
+							<th>可用 参数</th>
+							<td>
+								<table class="parameters">
+									<tr>
+										<th>参数</th>
+										<th class="description">详细描述</th>
+									</tr>
+									<tr>
+										<th><kbd>name</kbd></th>
+										<td>字段名</td>
+									</tr>
+									<tr>
+										<th><kbd>type</kbd></th>
+										<td>字段类型 (varchar, enum, text, ...)</td>
+									</tr>
+									<tr>
+										<th><kbd>constraint</kbd></th>
+										<td>长度或值. 值可以通过数组提供</td>
+									</tr>
+									<tr>
+										<th><kbd>charset</kbd></th>
+										<td>字段字符集</td>
+									</tr>
+									<tr>
+										<th><kbd>unsigned</kbd></th>
+										<td>boolean, <em>true</em> 是无符号, 默认是<em>false</em></td>
+									</tr>
+									<tr>
+										<th><kbd>default</kbd></th>
+										<td>默认值</td>
+									</tr>
+									<tr>
+										<th><kbd>null</kbd></th>
+										<td>boolean, <em>true</em> 是可以为空, 默认是 <em>false</em></td>
+									</tr>
+									<tr>
+										<th><kbd>auto_increment</kbd></th>
+										<td>设置成 <em>true</em> 使用自动递增</td>
+									</tr>
+									<tr>
+										<th><kbd>comment</kbd></th>
+										<td>字段增加注解</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+
+				<p>默认字段值会被转意. 有时候不想转意. 你可以使用 <a href="./db.html#method_expr">DB::expr</a>.</p>
+				<pre class="php"><code>\DBUtil::create_table('users', array(
+	'id' => array('constraint' => 11, 'type' => 'int', 'auto_increment' => true),
+	'name' => array('type' => 'text'),
+	'email' => array('constraint' => 50, 'type' => 'varchar'),
+	'title' => array('constraint' => 50, 'type' => 'varchar', 'default' => 'mr.'),
+	'created' => array('type' => 'timestamp', 'default' => \DB::expr('CURRENT_TIMESTAMP')),
+	'password' => array('constraint' => 125, 'type' => 'varchar'),
+), array('id'));
+</code></pre>
+
+				<p> DBUtil::add_fields 和 DBUtil::modify_fields 也同样会有转义</p>
+
+			</article>
+
+			<article>
+				<h4 class="method" id="method_field_exists">field_exists($table, $columns, $db = null)</h4>
+				<p><strong>field_exists</strong> 检查字段是否存在.</p>
+				<table class="method">
+					<tbody>
+						<tr>
+							<th>Static</th>
+							<td>是</td>
+						</tr>
+						<tr>
+							<th>Parameters</th>
+							<td>
+								<table class="parameters">
+									<tr>
+										<th>参数</th>
+										<th>默认</th>
+										<th class="description">详细描述</th>
+									</tr>
+									<tr>
+										<td>$table</td>
+										<td>required</td>
+										<td>数据库表名称</td>
+									</tr>
+									<tr>
+										<td>$columns</td>
+										<td>required</td>
+										<td>字段数组</td>
+									</tr>
+									<tr>
+										<th><kbd>$db</kbd></th>
+										<td><pre class="php"><code>null</code></pre></td>
+										<td class="description">数据库连接.</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+						<tr>
+							<th>Returns</th>
+							<td>数据库字段存在返回true , 否则返回false </td>
+						</tr>
+						<tr>
+							<th>示例</th>
+							<td>
+								<pre class="php"><code>
+if(DBUtil::field_exists('my_table', array('my_field_or_column')))
+{
+	// Fields exist
+}
+else
+{
+	// Fields are not available on the table
+}</code>
+								</pre>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</article>
+
+			<article>
+				<h4 class="method" id="method_add_fields">add_fields($table, $fields, $db = null)</h4>
+				<p><strong>add_fields</strong> 在数据库表中增加字段.</p>
+				<table class="method">
+					<tbody>
+						<tr>
+							<th>Static</th>
+							<td>是</td>
+						</tr>
+						<tr>
+							<th>Parameters</th>
+							<td>
+								<table class="parameters">
+									<tr>
+										<th>参数</th>
+										<th>默认</th>
+										<th class="description">消息描述</th>
+									</tr>
+									<tr>
+										<th><kbd>$table</kbd></th>
+										<td><em>required</em></td>
+										<td>数据库表名称</td>
+									</tr>
+									<tr>
+										<th><kbd>$fields</kbd></th>
+										<td><em>required</em></td>
+										<td>字段数组</td>
+									</tr>
+									<tr>
+										<th><kbd>$db</kbd></th>
+										<td><pre class="php"><code>null</code></pre></td>
+										<td class="description">数据库连接.</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+						<tr>
+							<th>Returns</th>
+							<td>返回影响的行数</td>
+						</tr>
+						<tr>
+							<th>Throws</th>
+							<td>\Database_Exception失败时</td>
+						</tr>
+						<tr>
+							<th>Example</th>
+							<td>
+								<pre class="php"><code>\DBUtil::add_fields('users', array(
+	'surname' => array('constraint' => 100, 'type' => 'varchar'),
+	'twitter_name' => array('constraint' => 100, 'type' => 'varchar'),
+));
+</code></pre>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</article>
+
+			<article>
+				<h4 class="method" id="method_drop_fields">drop_fields($table, $fields, $db = null)</h4>
+				<p>The <strong>drop_fields</strong> method drops fields from a table.</p>
+				<table class="method">
+					<tbody>
+						<tr>
+							<th>Static</th>
+							<td>Yes</td>
+						</tr>
+						<tr>
+							<th>Parameters</th>
+							<td>
+								<table class="parameters">
+									<tr>
+										<th>Param</th>
+										<th>Default</th>
+										<th class="description">Description</th>
+									</tr>
+									<tr>
+										<th><kbd>$table</kbd></th>
+										<td><em>required</em></td>
+										<td>string of the table name</td>
+									</tr>
+									<tr>
+										<th><kbd>$fields</kbd></th>
+										<td><em>required</em></td>
+										<td>string or array containing fields</td>
+									</tr>
+									<tr>
+										<th><kbd>$db</kbd></th>
+										<td><pre class="php"><code>null</code></pre></td>
+										<td class="description">The database connection.</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+						<tr>
+							<th>Returns</th>
+							<td>Returns the number of affected rows.</td>
+						</tr>
+						<tr>
+							<th>Throws</th>
+							<td>\Database_Exception on failure</td>
+						</tr>
+						<tr>
+							<th>Example</th>
+							<td>
+								<pre class="php"><code>\DBUtil::drop_fields('users', 'surname');</code></pre>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</article>
+
+			<article>
+				<h4 class="method" id="method_modify_fields">modify_fields($table, $fields, $db = null)</h4>
+				<p>The <strong>modify_fields</strong> method alters fields in a table.</p>
+				<table class="method">
+					<tbody>
+						<tr>
+							<th>Static</th>
+							<td>Yes</td>
+						</tr>
+						<tr>
+							<th>Parameters</th>
+							<td>
+								<table class="parameters">
+									<tr>
+										<th>Param</th>
+										<th>Default</th>
+										<th class="description">Description</th>
+									</tr>
+									<tr>
+										<th><kbd>$table</kbd></th>
+										<td><em>required</em></td>
+										<td>the table name</td>
+									</tr>
+									<tr>
+										<th><kbd>$fields</kbd></th>
+										<td><em>required</em></td>
+										<td>array containing fields</td>
+									</tr>
+									<tr>
+										<th><kbd>$db</kbd></th>
+										<td><pre class="php"><code>null</code></pre></td>
+										<td class="description">The database connection.</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+						<tr>
+							<th>Returns</th>
+							<td>Returns the number of affected rows.</td>
+						</tr>
+						<tr>
+							<th>Throws</th>
+							<td>\Database_Exception on failure</td>
+						</tr>
+						<tr>
+							<th>Example</th>
+							<td>
+								<pre class="php"><code>\DBUtil::modify_fields('users2', array(
+	'name' => array('constraint' => 100, 'type' => 'varchar', 'charset' => 'utf8_general_ci'),
+	'title' => array('constraint' => 50, 'type' => 'varchar', 'default' => 'mrs.'),
+));
+</code></pre>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</article>
+
+			<article>
+				<h4 class="method" id="method_create_index">create_index($table, $index_columns, $index_name, $index = '', $db = null)</h4>
+				<p>The <strong>create_index</strong> method allows you to create secondary indexes on a table.</p>
+				<table class="method">
+					<tbody>
+						<tr>
+							<th>Static</th>
+							<td>Yes</td>
+						</tr>
+						<tr>
+							<th>Parameters</th>
+							<td>
+								<table class="parameters">
+									<tr>
+										<th>Param</th>
+										<th>Default</th>
+										<th class="description">Description</th>
+									</tr>
+									<tr>
+										<th><kbd>$table</kbd></th>
+										<td><em>required</em></td>
+										<td>the table name</td>
+									</tr>
+									<tr>
+										<th><kbd>$index_columns</kbd></th>
+										<td><em>required</em></td>
+										<td>mixed, string or array of strings containing fields</td>
+									</tr>
+									<tr>
+										<th><kbd>$index_name</kbd></th>
+										<td><em>optional</em></td>
+										<td>name of the index to be created</td>
+									</tr>
+									<tr>
+										<th><kbd>$index</kbd></th>
+										<td><em>optional</em></td>
+										<td>type of index to be created.<br />Currently supported: UNIQUE, FULLTEXT, SPATIAL, NONCLUSTERED</td>
+									</tr>
+									<tr>
+										<th><kbd>$db</kbd></th>
+										<td><pre class="php"><code>null</code></pre></td>
+										<td class="description">The database connection.</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+						<tr>
+							<th>Returns</th>
+							<td>Returns the result of the database operation.</td>
+						</tr>
+						<tr>
+							<th>Throws</th>
+							<td>\Database_Exception on failure</td>
+						</tr>
+						<tr>
+							<th>Example</th>
+							<td>
+								<pre class="php"><code>\DBUtil::create_index('table', 'name');
+// produces CREATE INDEX name ON table ( `name` )
+
+\DBUtil::create_index('table', array('nameA', 'nameB'), 'name');
+// produces CREATE INDEX name ON table ( `nameA`, `nameB` )
+
+\DBUtil::create_index('table', array('nameA' => 'ASC', 'nameB'), 'name', 'fulltext');
+// produces CREATE FULLTEXT INDEX name ON table ( `nameA` ASC, `nameB` )
+</code></pre>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</article>
+
+			<article>
+				<h4 class="method" id="method_drop_index">drop_index($table, $index_name, $db = null)</h4>
+				<p>The <strong>drop_index</strong> method allows you to drop a secondary index from a table.</p>
+				<table class="method">
+					<tbody>
+						<tr>
+							<th>Static</th>
+							<td>Yes</td>
+						</tr>
+						<tr>
+							<th>Parameters</th>
+							<td>
+								<table class="parameters">
+									<tr>
+										<th>Param</th>
+										<th>Default</th>
+										<th class="description">Description</th>
+									</tr>
+									<tr>
+										<th><kbd>$table</kbd></th>
+										<td><em>required</em></td>
+										<td>the table name</td>
+									</tr>
+									<tr>
+										<th><kbd>$index_name</kbd></th>
+										<td><em>required</em></td>
+										<td>name of the index to be dropped</td>
+									</tr>
+									<tr>
+										<th><kbd>$db</kbd></th>
+										<td><pre class="php"><code>null</code></pre></td>
+										<td class="description">The database connection.</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+						<tr>
+							<th>Returns</th>
+							<td>Returns the result of the database operation.</td>
+						</tr>
+						<tr>
+							<th>Throws</th>
+							<td>\Database_Exception on failure</td>
+						</tr>
+						<tr>
+							<th>Example</th>
+							<td>
+								<pre class="php"><code>\DBUtil::drop_index('table', 'name');
+// produces DROP INDEX name ON table
+</code></pre>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</article>
+
+			<article>
+				<h4 class="method" id="method_add_foregin_key">add_foregin_key($table, $foreign_key)</h4>
+				<p>The <strong>add_foreign_key</strong> method allows you to add a foreign key to a table after its creation.</p>
+				<table class="method">
+					<tbody>
+						<tr>
+							<th>Static</th>
+							<td>Yes</td>
+						</tr>
+						<tr>
+							<th>Parameters</th>
+							<td>
+								<table class="parameters">
+									<tr>
+										<th>Param</th>
+										<th>Default</th>
+										<th class="description">Description</th>
+									</tr>
+									<tr>
+										<th><kbd>$table</kbd></th>
+										<td><em>required</em></td>
+										<td>the table name</td>
+									</tr>
+									<tr>
+										<th><kbd>$foreign_key</kbd></th>
+										<td><em>required</em></td>
+										<td>array containing the foreign key definition.</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+						<tr>
+							<th>Returns</th>
+							<td>Returns the result of the database operation.</td>
+						</tr>
+						<tr>
+							<th>Throws</th>
+							<td>\InvalidArgumentException on invalid input, \Database_Exception on failure</td>
+						</tr>
+						<tr>
+							<th>Example</th>
+							<td>
+								<pre class="php"><code>\DBUtil::add_foreign_key('users', array(
+	'constraint' => 'constraintA',
+	'key' => 'keyA',
+	'reference' => array(
+		'table' => 'table',
+		'column' => 'field',
+	),
+	'on_update' => 'CASCADE',
+	'on_delete' => 'RESTRICT'
+));</code></pre>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</article>
+
+			<article>
+				<h4 class="method" id="method_drop_foreign_key">drop_foreign_key($table, $fk_name)</h4>
+				<p>The <strong>drop_foreign_key</strong> method allows you to drop a foreign key from a table.</p>
+				<table class="method">
+					<tbody>
+						<tr>
+							<th>Static</th>
+							<td>Yes</td>
+						</tr>
+						<tr>
+							<th>Parameters</th>
+							<td>
+								<table class="parameters">
+									<tr>
+										<th>Param</th>
+										<th>Default</th>
+										<th class="description">Description</th>
+									</tr>
+									<tr>
+										<th><kbd>$table</kbd></th>
+										<td><em>required</em></td>
+										<td>the table name</td>
+									</tr>
+									<tr>
+										<th><kbd>$fk_name</kbd></th>
+										<td><em>required</em></td>
+										<td>name of the foreign key to be dropped</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+						<tr>
+							<th>Returns</th>
+							<td>Returns the result of the database operation.</td>
+						</tr>
+						<tr>
+							<th>Throws</th>
+							<td>\Database_Exception on failure</td>
+						</tr>
+						<tr>
+							<th>Example</th>
+							<td>
+								<pre class="php"><code>\DBUtil::drop_foreign_key('table', 'name');
+// produces ALTER TABLE `table` DROP FOREIGN KEY name
+</code></pre>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</article>
+
+			<h3 id="database-operations">Database operations</h3>
+
+			<article>
+				<h4 class="method" id="method_truncate_table">truncate_table($table, $db = null)</h4>
+				<p>The <strong>truncate_table</strong> method truncates a table.</p>
+				<table class="method">
+					<tbody>
+						<tr>
+							<th>Static</th>
+							<td>Yes</td>
+						</tr>
+						<tr>
+							<th>Parameters</th>
+							<td>
+								<table class="parameters">
+									<tr>
+										<th>Param</th>
+										<th>Default</th>
+										<th class="description">Description</th>
+									</tr>
+									<tr>
+										<th><kbd>$table</kbd></th>
+										<td><em>required</em></td>
+										<td class="description">the table name.</td>
+									</tr>
+									<tr>
+										<th><kbd>$db</kbd></th>
+										<td><pre class="php"><code>null</code></pre></td>
+										<td class="description">The database connection.</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+						<tr>
+							<th>Returns</th>
+							<td>Returns the number of affected rows.</td>
+						</tr>
+						<tr>
+							<th>Throws</th>
+							<td>\Database_Exception when not supported</td>
+						</tr>
+						<tr>
+							<th>Example</th>
+							<td>
+								<pre class="php"><code>\DBUtil::truncate_table('my_table');</code></pre>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</article>
+
+			<article>
+				<h4 class="method" id="method_analyze_table">analyze_table($table, $db = null)</h4>
+				<p>The <strong>analyze_table</strong> method analyzes a table.</p>
+				<table class="method">
+					<tbody>
+						<tr>
+							<th>Static</th>
+							<td>Yes</td>
+						</tr>
+						<tr>
+							<th>Parameters</th>
+							<td>
+								<table class="parameters">
+									<tr>
+										<th>Param</th>
+										<th>Default</th>
+										<th class="description">Description</th>
+									</tr>
+									<tr>
+										<th><kbd>$table</kbd></th>
+										<td><em>required</em></td>
+										<td class="description">the table name.</td>
+									</tr>
+									<tr>
+										<th><kbd>$db</kbd></th>
+										<td><pre class="php"><code>null</code></pre></td>
+										<td class="description">The database connection.</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+						<tr>
+							<th>Returns</th>
+							<td><em>True</em> if the table is OK. <em>False</em> when needs attention. If not supported it logs the error message.</td>
+						</tr>
+						<tr>
+							<th>Example</th>
+							<td>
+								<pre class="php"><code>if(\DBUtil::analyze_table('table_name') === false)
+{
+	// Do something
+}
+</code></pre>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</article>
+
+			<article>
+				<h4 class="method" id="method_check_table">check_table($table, $db = null)</h4>
+				<p>The <strong>check_table</strong> method checks a table.</p>
+				<table class="method">
+					<tbody>
+						<tr>
+							<th>Static</th>
+							<td>Yes</td>
+						</tr>
+						<tr>
+							<th>Parameters</th>
+							<td>
+								<table class="parameters">
+									<tr>
+										<th>Param</th>
+										<th>Default</th>
+										<th class="description">Description</th>
+									</tr>
+									<tr>
+										<th><kbd>$table</kbd></th>
+										<td><em>required</em></td>
+										<td class="description">the table name.</td>
+									</tr>
+									<tr>
+										<th><kbd>$db</kbd></th>
+										<td><pre class="php"><code>null</code></pre></td>
+										<td class="description">The database connection.</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+						<tr>
+							<th>Returns</th>
+							<td><em>True</em> if the table is OK. <em>False</em> when needs attention. If not supported it logs the error message.</td>
+						</tr>
+						<tr>
+							<th>示例</th>
+							<td>
+								<pre class="php"><code>if(\DBUtil::check_table('table_name') === false)
+{
+	// Do something
+}
+</code></pre>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</article>
+
+			<article>
+				<h4 class="method" id="method_optimize_table">optimize_table($table, $db = null)</h4>
+				<p><strong>optimize_table</strong> 优化数据库表.</p>
+				<table class="method">
+					<tbody>
+						<tr>
+							<th>Static</th>
+							<td>是</td>
+						</tr>
+						<tr>
+							<th>Parameters</th>
+							<td>
+								<table class="parameters">
+									<tr>
+										<th>参数</th>
+										<th>默认</th>
+										<th class="description">详细信息</th>
+									</tr>
+									<tr>
+										<th><kbd>$table</kbd></th>
+										<td><em>required</em></td>
+										<td class="description">数据库表名称.</td>
+									</tr>
+									<tr>
+										<th><kbd>$db</kbd></th>
+										<td><pre class="php"><code>null</code></pre></td>
+										<td class="description">数据库连接.</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+						<tr>
+							<th>Returns</th>
+							<td>数据库表优化成功或已被优化返回<em>True</em>. 失败返回<em>False</em>. 不支持或失败会记录错误信息日志.</td>
+						</tr>
+						<tr>
+							<th>示例</th>
+							<td>
+								<pre class="php"><code>if(\DBUtil::optimize_table('table_name') === false)
+{
+	// Do something
+}
+</code></pre>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</article>
+
+			<article>
+				<h4 class="method" id="method_repair_table">repair_table($table, $db = null)</h4>
+				<p><strong>repair_table</strong>修复数据表.</p>
+				<table class="method">
+					<tbody>
+						<tr>
+							<th>Static</th>
+							<td>是</td>
+						</tr>
+						<tr>
+							<th>Parameters</th>
+							<td>
+								<table class="parameters">
+									<tr>
+										<th>参数</th>
+										<th>默认</th>
+										<th class="description">详细描述</th>
+									</tr>
+									<tr>
+										<th><kbd>$table</kbd></th>
+										<td><em>required</em></td>
+										<td class="description">数据库表名称.</td>
+									</tr>
+									<tr>
+										<th><kbd>$db</kbd></th>
+										<td><pre class="php"><code>null</code></pre></td>
+										<td class="description">数据库连接.</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+						<tr>
+							<th>Returns</th>
+							<td> 数据库表完好或修复完返回<em>True</em>.  失败返回<em>false</em>. 不支持或失败会记录错误信息日志.</td>
+						</tr>
+						<tr>
+							<th>示例</th>
+							<td>
+								<pre class="php"><code>if(\DBUtil::repair_table('table_name') === false)
+{
+	// Do something
+}
+</code></pre>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</article>
+
+		</div>
+
+		<footer>
+			<p>
+				&copy; FuelPHP Development Team 2010-2015 - <a href="http://fuelphp.com">FuelPHP</a> is released under the MIT license.
+			</p>
+		</footer>
+	</div>
+</body>
+</html>
